@@ -278,7 +278,7 @@ class EncoderLayer(tf.keras.layers.Layer):
         return out2, attn_weights
 
 
-class Encoder(tf.keras.layers.Layer):
+class Encoder(tf.keras.layers.Layer):  # 编码
     def __init__(self, num_layers, d_model, num_heads, dff, input_vocab_size,
                  maximum_position_encoding, rate=0.1, rpr=False):
 
@@ -362,7 +362,7 @@ class DecoderLayer(tf.keras.layers.Layer):
         return out3, attn_weights_block1, attn_weights_block2
 
 
-class Decoder(tf.keras.layers.Layer):
+class Decoder(tf.keras.layers.Layer): # 解码
     def __init__(self, num_layers, d_model, num_heads, dff, target_vocab_size,
                  maximum_position_encoding, rate=0.1, rpr=False):
         super(Decoder, self).__init__()
