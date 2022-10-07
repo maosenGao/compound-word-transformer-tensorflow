@@ -13,7 +13,8 @@ from utils import *
 
 class model:
 
-    def getTransformerXL(self, config, log_dir, checkpoint_dir):
+    def getTransformerXL(self, config, log_dir, checkpoint_dir): # get Transformer XL 
+        # [?]XL什么意思？
 
         if log_dir != None:
             for key in config.keys():
@@ -41,7 +42,7 @@ class model:
 
         return mt
 
-    def getTransformer(self, config, log_dir, checkpoint_dir):
+    def getTransformer(self, config, log_dir, checkpoint_dir): # get Transformer
 
         if log_dir != None:
             for key in config.keys():
@@ -70,7 +71,7 @@ class model:
 
         return mt
 
-    def getLinearTransformerXL(self, config, log_dir=None, checkpoint_dir=None):
+    def getLinearTransformerXL(self, config, log_dir=None, checkpoint_dir=None): # get Linear Transformer XL
         c = config
         # if log_dir !=None :
         #   for key in c.keys(): log_dir += f"-{key}{ '|'.join(c[key]) if isinstance(c[key], list) else c[key]}"
@@ -107,7 +108,7 @@ class model:
         return mt
 
 
-class MultiHeadAttention(tf.keras.layers.Layer):
+class MultiHeadAttention(tf.keras.layers.Layer): # Multi Head Attention
     def __init__(self, d_model, num_heads, maximum_position_encoding, rpr=True):
         super(MultiHeadAttention, self).__init__()
         self.num_heads = num_heads
