@@ -1,31 +1,9 @@
 import numpy as np
 import json
-from utils import token2vocab # utils 也是一个自己写的工具
-
-# vocab - 必应词典
-# 网络单词；词汇；生字
-
+from utils import token2vocab
 from miditok import CPWordEncoding
 
-# [[MidiTok]]将MIDI音乐文件转换为令牌序列，即整数，准备好被馈送到序列神经网络，如[[transformer]]或[[rnn]]。
-# [[miditok]]具有大多数已知的MIDI令牌化策略，并且围绕着它们都共享公共参数和方法的思想构建。
-# 它包含允许正确预处理任何MIDI文件的方法，并且还支持字节对编码(BPE)。
-
-# MidiTok使用MIDIToolkit，它本身使用Mido来读写MIDI文件。
-
-# 也都是一些函数啊 
-
-
-
-class CP_Word_Dataset(): 
-    # cp是怎样的意思？CPWordEncoding
-    # 这里是怎样一个处理方式？
-    
-    #     由复合词转换器引入的这种表示类似于REMI编码。
-    # 关键的区别在于，同一“事件”的不同类型的标记由模型同时组合和处理。
-    # 例如，同一音符的Pitch、Velocity和duration标记将被组合。
-    # 这种编码策略的最大好处是减少了它创建的序列长度，这意味着更少的时间和内存消耗，因为变压器(具有softmax注意)具有二次复杂度。
-    
+class CP_Word_Dataset():
     
     def __init__(self, dir, length, eos_tokens = None):
         self.dir = dir
@@ -58,7 +36,6 @@ class CP_Word_Dataset():
         return [token2vocab(self._getSeq(idx)) for idx in idxs]
 
     def _getSeq(self, idx):
-        
         seq_n = np.where(self.dataset_idx > idx)[0][0] - 1
 
         bar_idx_n = self.bar_idx_final[seq_n]
@@ -83,7 +60,7 @@ class CP_Word_Dataset():
 
         return r
     
-def get_tokenizer(): # 原来这个函数是自己定义的 
+def get_tokenizer():
     pitch_range = range(21, 109)
     beat_res = {(0, 4): 8, (4, 12): 4}
     nb_velocities = 32

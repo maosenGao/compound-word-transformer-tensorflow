@@ -99,7 +99,7 @@ def batch_parse2(items):
 
 # for CPWordEncoding
 # 
-def token2vocab(token):
+def token2vocab(token): # 这个在dataset 文件中用到了 转化为单词表
     token = np.array(token)
     pad = np.not_equal(token, 0) * 1
     token[...,0] -= 1 # family
@@ -113,7 +113,7 @@ def token2vocab(token):
     token *= pad
     return token 
 
-def vocab2token(vocab):
+def vocab2token(vocab): # 转化为令牌
     vocab = np.array(vocab)
     pad = np.not_equal(vocab, 0) * 1
     vocab[...,0] += 1 # family
@@ -166,7 +166,7 @@ def sampling(logit, p=False, t=1.0):
     else:
         return weight(probs)
     
-class DynamicTemperature():
+class DynamicTemperature(): # 温度是怎样一个参数
     def __init__(self, warmup_num):
         super(DynamicTemperature, self).__init__()
         self.warmup_num = warmup_num
